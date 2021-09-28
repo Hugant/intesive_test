@@ -14,12 +14,23 @@
 			<label for="level">Level:</label>
 			<input id="level" type="text">
 			<button id="button">start</button>
+			<button id="coords">Get coords</button>
 		</div>
 
 		<div>
-			<h2>Player</h2>
-			<span>2222</span>
-			<span>asdfsadf</span>
+			<h2>Player coordinates</h2>
+			<table>
+				<thead>
+					<tr>
+						<th>x</th>
+						<th>y</th>
+						<th></th>
+					</tr>
+				</thead>
+				<tbody id="tbody">
+
+				</tbody>
+			</table>
 		</div>
 	</section>
 
@@ -28,10 +39,13 @@
 	</section>
 </body>
 
+<script src="javascript/Enemy.js"></script>
 <script src="javascript/Player.js"></script>
 <script src="javascript/Tile.js"></script>
 <script src="javascript/Field.js"></script>
+
 <script src="javascript/Keyboard.js"></script>
 <script src="javascript/Game.js"></script>
+
 <script src="javascript/index.js"></script>
 </html>

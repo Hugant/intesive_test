@@ -16,28 +16,28 @@ class Field {
 	}
 
 	init() {
-		for (let i = 0; i < this.width; i++) {
+		for (let i = 0; i < this.height; i++) {
 			this.field.push([]);
-			for (let j = 0; j < this.height; j++) {
+			for (let j = 0; j < this.width; j++) {
 				if (Math.random() > 0.8) {
 					if (Math.random() > 0.5) {
-						this.field[i][j] = new Tile(i * DIMENSIONS.tile_width, j * DIMENSIONS.tile_height, FIELDS_SPRITE['3']);
+						this.field[i][j] = new Tile(j, i, FIELDS_SPRITE['3'], false);
 					} else {
-						this.field[i][j] = new Tile(i * DIMENSIONS.tile_width, j * DIMENSIONS.tile_height, FIELDS_SPRITE['4']);
+						this.field[i][j] = new Tile(j, i, FIELDS_SPRITE['4'], false);
 					}
 				} else if(Math.random() > 0.99) {
 					if (Math.random() > 0.5) {
-						this.field[i][j] = new Tile(i * DIMENSIONS.tile_width, j * DIMENSIONS.tile_height, FIELDS_SPRITE['5']);
+						this.field[i][j] = new Tile(j, i, FIELDS_SPRITE['5'], true);
 					} else {
-						this.field[i][j] = new Tile(i * DIMENSIONS.tile_width, j * DIMENSIONS.tile_height, FIELDS_SPRITE['6']);
+						this.field[i][j] = new Tile(j, i, FIELDS_SPRITE['6'], true);
 					}
 				} else if(Math.random() > 0.9) {
-					this.field[i][j] = new Tile(i * DIMENSIONS.tile_width, j * DIMENSIONS.tile_height, FIELDS_SPRITE['7']);
+					this.field[i][j] = new Tile(j, i, FIELDS_SPRITE['7'], true);
 				} else {
 					if(Math.random() > 0.5) {
-						this.field[i][j] = new Tile(i * DIMENSIONS.tile_width, j * DIMENSIONS.tile_height, FIELDS_SPRITE['1']);
+						this.field[i][j] = new Tile(j, i, FIELDS_SPRITE['1'], true);
 					} else {
-						this.field[i][j] = new Tile(i * DIMENSIONS.tile_width, j * DIMENSIONS.tile_height, FIELDS_SPRITE['2']);
+						this.field[i][j] = new Tile(j, i, FIELDS_SPRITE['2'], true);
 					}
 				}
 			}

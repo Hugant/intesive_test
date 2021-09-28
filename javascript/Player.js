@@ -9,25 +9,46 @@ class Player {
 		this.hp = hp;
 		this.attack = attack;
 		this.last_move = null;
+		this.tick = null;
+		this.drawing = true;
 	}
 
-	move(keyboard) {
-		if (this.last_move === null || Date.now() - this.last_move >= 500) {
-			if (keyboard.isDown('DOWN')) {
-				this.y += (this.y < DIMENSIONS.field_height - 1 ? 1 : 0);
-			} else if (keyboard.isDown('UP')) {
-				this.y -= (this.y > 0 ? 1 : 0);
-			} else if (keyboard.isDown('LEFT')) {
-				this.x -= (this.x > 0 ? 1 : 0);
-			} else if (keyboard.isDown('RIGHT')) {
-				this.x += (this.x < DIMENSIONS.field_width - 1 ? 1 : 0);
-			}
-
+	move(keyboard, field) {
+		if (this.last_move === null || Date.now() - this.last_move >= 150) {
+			let time = this.last_move;
 			this.last_move = Date.now();
+			if (keyboard.isDown('DOWN')) {
+				if (this.y < DIMENSIONS.field_height - 1) {
+					this.y += field.field[this.y + 1][this.x].moveable;
+				}
+			} else if (keyboard.isDown('UP')) {
+				if (this.y > 0) {
+					this.y -= field.field[this.y - 1][this.x].moveable;
+				}
+			} else if (keyboard.isDown('LEFT')) {
+				if (this.x > 0) {
+					this.x -= field.field[this.y][this.x - 1].moveable;
+				}
+			} else if (keyboard.isDown('RIGHT')) {
+				if (this.x < DIMENSIONS.field_width - 1) {
+					this.x += field.field[this.y][this.x + 1].moveable;
+				}
+			} else {
+				this.last_move = time;
+			}
 		}
+
+		return true;
 	}
 
 	draw(context) {
-		context.drawImage(this.image, this.x * DIMENSIONS.tile_width, this.y * DIMENSIONS.tile_height, this.width, this.height);
+		if (this.tick === null || Date.now() - this.tick >= 300) {
+			this.drawing = !this.drawing;
+			this.tick = Date.now();
+		}
+
+		// if (this.drawing) {
+			context.drawImage(this.image, this.x * DIMENSIONS.tile_width, this.y * DIMENSIONS.tile_height, this.width, this.height);
+		// }
 	}
 }

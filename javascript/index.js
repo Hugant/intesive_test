@@ -26,3 +26,9 @@ document.getElementById('button').onclick = function() {
 	console.log(username);
 	console.log(level);
 }
+
+document.getElementById('coords').onclick = function() {
+	tbody = document.getElementById('tbody');
+	tbody.insertAdjacentHTML('beforeend', '<tr><td>' + game.player.x + '</td><td>' + game.player.y + '</td>' +
+		'<td><button class="plus">+</button></td></tr>');
+}

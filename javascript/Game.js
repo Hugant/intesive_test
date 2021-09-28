@@ -5,8 +5,10 @@ class Game {
 		this.keyboard = null;
 
 		this.isPause = false;
+		this.player_step = true;
 
 		this.player = null;
+		this.enemies = null;
 	}
 
 	init(canvas_id, width, height) {
@@ -21,6 +23,8 @@ class Game {
 		this.field.init();
 
 		this.player = new Player(3, 3, 'images/hero.png', 5, 1)
+
+		this.enemies = [new Goblin(20, 25)]
 	}
 
 	start() {
@@ -40,6 +44,20 @@ class Game {
 		this.field.draw(this.context);
 		this.player.draw(this.context);
 
-		this.player.move(this.keyboard);
+		for (let enemy of this.enemies) {
+			enemy.draw(this.context);
+		}
+
+
+		if (this.player_step) {
+			this.player_step = this.player.move(this.keyboard, this.field);
+		} else {
+			for (let enemy of this.enemies) {
+				enemy.move(this.player.x, this.player.y);
+			}
+			this.player_step = true;
+		}
+
+
 	}
 }
